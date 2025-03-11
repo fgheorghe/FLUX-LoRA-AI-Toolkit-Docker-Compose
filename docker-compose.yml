@@ -1,0 +1,30 @@
+services:
+  flux-lora:
+    platform: linux/amd64
+    build:
+      context: .
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+#              count: all
+              device_ids: ["0"]
+              capabilities: [gpu]
+
+    volumes:
+        - ${DATA_PATH}/config:/flux-lora/config:bind
+        - ${DATA_PATH}/datasets:/flux-lora/datasets:bind
+        - ${DATA_PATH}/extensions:/flux-lora/extensions:bind
+        - ${DATA_PATH}/extensions_built_in:/flux-lora/extensions_built_in:bind
+        - ${DATA_PATH}/output:/flux-lora/output:bind
+        - ${DATA_PATH}/.env:/flux-lora/.env:bind
+        - ${DATA_PATH}/aitk_db.db:/flux-lora/aitk_db.db:bind
+    ports:
+        - ${PORT:-8675}:8675
+    environment:
+        - PORT=${PORT:-8675}
+        - DATA_PATH=${DATA_PATH}
+        - NVIDIA_VISIBLE_DEVICES=0
+    restart: always
