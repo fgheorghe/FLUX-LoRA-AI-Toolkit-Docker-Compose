@@ -1,5 +1,6 @@
 services:
   flux-lora:
+    shm_size: '91gb'
     platform: linux/amd64
     build:
       context: .
@@ -25,6 +26,6 @@ services:
         - ${PORT:-8675}:8675
     environment:
         - PORT=${PORT:-8675}
-        - DATA_PATH=${DATA_PATH}
+        - DATA_PATH=/home/fgheorghe/Mounts/game-dev-large/AI/flux-lora
         - NVIDIA_VISIBLE_DEVICES=0
     restart: always

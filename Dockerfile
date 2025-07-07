@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.8.0-runtime-ubuntu22.04
+FROM nvidia/cuda:12.9.0-runtime-ubuntu22.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
@@ -27,7 +27,7 @@ RUN git submodule update --init --recursive
 
 RUN python3.10 -m venv venv
 
-RUN . venv/bin/activate && pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu124
+RUN . venv/bin/activate && pip install --pre torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/nightly/cu129
 
 RUN . venv/bin/activate && pip install -r requirements.txt
 
