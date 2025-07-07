@@ -26,6 +26,6 @@ services:
         - ${PORT:-8675}:8675
     environment:
         - PORT=${PORT:-8675}
-        - DATA_PATH=/home/fgheorghe/Mounts/game-dev-large/AI/flux-lora
+        - DATA_PATH=${DATA_PATH}
         - NVIDIA_VISIBLE_DEVICES=0
     restart: always
